@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-   
-    public class CarManager:ICarService
+
+    public class CarManager : ICarService
     {
         ICarDal _carDal;
         public CarManager(ICarDal carDal)
@@ -34,20 +34,33 @@ namespace Business.Concrete
             }
         }
 
+        public void Delete(Car car)
+        {
+           _carDal.Delete(car);
+            Console.WriteLine("Car Deleted!");
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();    
         }
 
-        public List<Car> GetCarsByBrandId(int brandId)
+        public Car GetCarsBy(int carId)
         {
-            return _carDal.GetAll(p=> p.BrandId == brandId);
-
+            return _carDal.Get(p => p.CarId == carId);
         }
 
-        public List<Car> GetCarsByColorId(int colorId)
+
+        
+        public Car GetCarsId(int carId)
         {
-            return _carDal.GetAll(p=>p.ColorId==colorId);
+            return _carDal.Get(p => p.CarId == carId);
+        }
+
+        public void Update(Car car)
+        {
+           _carDal.Update(car);
+            Console.WriteLine("Car updated!");
         }
     }
 }
