@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -19,48 +21,43 @@ namespace Business.Concrete
 
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
             if (car.Description.Length >2 && car.DailyPrice > 0)
             {
                 _carDal.Add(car);
-                Console.WriteLine("Araç Eklenmiştir");
+                return new SuccessResult(Message.Create);
 
             }
-            else
-            {
-                Console.WriteLine("Araç Eklenemdi!! Lütfen Açıklamyı daha uzun tutun ve Gün fiyatı olarak sıfırdan yüksek rakam girilmelidir.");
-
-            }
+            return new ErrorResult(Message.NameInvalid);
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
            _carDal.Delete(car);
-            Console.WriteLine("Car Deleted!");
+           return new SuccessResult(Message.Delete);  
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll();    
+
+            if (DateTime.Now.Hour==22)
+            {
+                return new ErrorDataResult<List<Car>>(Message.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Message.Listed);    
         }
 
-        public Car GetCarsBy(int carId)
+
+        public IDataResult<Car> GetCarsId(int carId)
         {
-            return _carDal.Get(p => p.CarId == carId);
+            return new SuccessDataResult<Car>(_carDal.Get(p => p.CarId == carId));
         }
 
-
-        
-        public Car GetCarsId(int carId)
-        {
-            return _carDal.Get(p => p.CarId == carId);
-        }
-
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
            _carDal.Update(car);
-            Console.WriteLine("Car updated!");
+            return new SuccessResult(Message.Update);
         }
     }
 }
