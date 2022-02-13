@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Business.Constants;
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -10,11 +11,14 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            //NewUser();
+           //NewCustomer();
+
             //CarManager carManager = CArmanagerTest();
             //CarAddTest(carManager);
             //CarDelete();
             //CarUpdate();
-            //CaraddT();
+            CaraddT();
             //CarGetById();
             //CarGetAll();
 
@@ -34,6 +38,21 @@ namespace ConsoleUI
 
         }
 
+        private static void NewCustomer()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+
+            customerManager.Add(new Customer { CostumerId = 101, CompanyName = "opıyh" });
+            Console.WriteLine("Yeni Müşteri Eklenmiştir.");
+        }
+
+        private static void NewUser()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            userManager.Add(new User { FirstName = "Onur", LastName = "Vuran", UserId = 1, Email = "onurvuran0@gmail.com", Paswword = "12345" });
+            Console.WriteLine("User Eklendi.");
+        }
+
         //private static void CarGetAll()
         //{
         //    CarManager carManager = new CarManager(new EfCarDal());
@@ -49,11 +68,11 @@ namespace ConsoleUI
         //    Console.WriteLine(carManager.GetCarsId(5).Description);
         //}
 
-        //private static void CaraddT()
-        //{
-        //    CarManager carManager = new CarManager(new EfCarDal());
-        //    carManager.Add(new Car { CarId = 19, BrandId = 19, ColorId = 2, DailyPrice = 1345600, ModelYear = 2022, Description = "Toyota" });
-        //}
+       private static void CaraddT()
+        {
+           CarManager carManager = new CarManager(new EfCarDal());
+            carManager.Add(new Car { CarId = 19, BrandId = 19, ColorId = 2, DailyPrice = 1345600, ModelYear = 2022, Description = "Toyota" });
+        }
 
         //private static void CarUpdate()
         //{
@@ -158,7 +177,7 @@ namespace ConsoleUI
         //{
         //    CarManager carManager = new CarManager(new EfCarDal());
 
-           
+
 
 
         //    foreach (var car in carManager.GetAll())
@@ -170,6 +189,6 @@ namespace ConsoleUI
         //    return carManager;
         //}
 
-        
+
     }
 }
