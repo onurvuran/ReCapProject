@@ -12,13 +12,13 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //NewUser();
-           //NewCustomer();
+           NewCustomer();
 
             //CarManager carManager = CArmanagerTest();
             //CarAddTest(carManager);
             //CarDelete();
             //CarUpdate();
-            CaraddT();
+            //CaraddT();
             //CarGetById();
             //CarGetAll();
 
