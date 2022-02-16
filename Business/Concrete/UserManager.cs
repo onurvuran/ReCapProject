@@ -27,7 +27,7 @@ namespace Business.Concrete
             return new SuccessResult(Message.Create);
         }
 
-        public IDataResult<User> ColorGetById(int userId)
+        public IDataResult<User> UserGetById(int userId)
         {
             return new SuccessDataResult<User>(_userDal.Get(p => p.UserId == userId));
         }
