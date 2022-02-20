@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -13,21 +15,23 @@ namespace Business.Concrete
 {
     public class BrandManager : IBrandService
     {
-         IBrandDal _brandDal;
+        IBrandDal _brandDal;
 
         public BrandManager(IBrandDal brandDal)
         {
             _brandDal = brandDal;
         }
 
-       public IResult Add(Brand brand)
-        {
-            if (brand.BrandName.Length<2)
-            {
-                return new ErrorResult(Message.NameInvalid);
 
-            }
-             _brandDal.Add(brand);
+        [ValidationAspect(typeof(BrandValidator))]
+        public IResult Add(Brand brand)
+        {
+            //if (brand.BrandName.Length < 2)
+            //{
+            //    return new ErrorResult(Message.NameInvalid);
+
+            //}
+            _brandDal.Add(brand);
             return new SuccessResult(Message.Create);
 
         }
@@ -37,12 +41,12 @@ namespace Business.Concrete
             _brandDal.Delete(brand);
 
             return new SuccessResult(Message.Delete);
-            
+
         }
 
         public IDataResult<List<Brand>> GetAll()
         {
-            if (DateTime.Now.Hour==22)
+            if (DateTime.Now.Hour == 22)
             {
                 return new ErrorDataResult<List<Brand>>(Message.MaintenanceTime);
             }
@@ -53,13 +57,13 @@ namespace Business.Concrete
 
         public IDataResult<Brand> BrandGetById(int brandId)
         {
-            return new SuccessDataResult<Brand>( _brandDal.Get(p => p.BrandId == brandId));
+            return new SuccessDataResult<Brand>(_brandDal.Get(p => p.BrandId == brandId));
         }
 
         public IResult Update(Brand brand)
         {
-            
-            
+
+
             _brandDal.Update(brand);
             return new SuccessResult(Message.Update);
         }
