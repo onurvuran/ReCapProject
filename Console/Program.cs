@@ -49,7 +49,7 @@ namespace ConsoleUI
         private static void NewUser()
         {
             UserManager userManager = new UserManager(new EfUserDal());
-            userManager.Add(new User { FirstName = "Onur", LastName = "Vuran", UserId = 1, Email = "onurvuran0@gmail.com", Paswword = "12345" });
+            userManager.Add(new Userr { FirstName = "Onur", LastName = "Vuran", UserId = 1, Email = "onurvuran0@gmail.com", Paswword = "12345" });
             Console.WriteLine("User Eklendi.");
         }
 

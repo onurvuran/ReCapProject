@@ -27,10 +27,10 @@ namespace Business.Concrete
             if (rental.ReturnDate == null)
             {
                 _rentalDal.Add(rental);
-                return new ErrorResult(Message.Create);
+                return new ErrorResult(Messages.Create);
             }
             _rentalDal.Add(rental);
-            return new SuccessResult(Message.Create);
+            return new SuccessResult(Messages.Create);
 
         }
 
@@ -42,18 +42,18 @@ namespace Business.Concrete
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
-            return new SuccessResult(Message.Delete);
+            return new SuccessResult(Messages.Delete);
         }
 
         public IDataResult<List<Rental>> GetAll()
         {
-            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(),Message.Listed);
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(),Messages.Listed);
         }
 
         public IResult Update(Rental rental)
         {
            _rentalDal.Update(rental);
-            return new SuccessResult(Message.Update);
+            return new SuccessResult(Messages.Update);
         }
     }
 }

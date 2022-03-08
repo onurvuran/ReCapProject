@@ -24,19 +24,19 @@ namespace Business.Concrete
         public IResult Add(Color color)
         {
             _icolorDal.Add(color);
-            return new SuccessResult(Message.Create);
+            return new SuccessResult(Messages.Create);
         }
 
         public IResult Delete(Color color)
         {
             _icolorDal.Delete(color);
-            return new SuccessResult(Message.Delete);
+            return new SuccessResult(Messages.Delete);
         }
 
         public IDataResult<List<Color>> GetAll()
         {
           
-            return new SuccessDataResult<List<Color>>(_icolorDal.GetAll(), Message.Listed);
+            return new SuccessDataResult<List<Color>>(_icolorDal.GetAll(), Messages.Listed);
         }
 
         public IDataResult<Color> ColorGetById(int colorId)
@@ -47,7 +47,7 @@ namespace Business.Concrete
         public IResult Update(Color color)
         {
             _icolorDal.Update(color);
-            return new SuccessResult(Message.Update);
+            return new SuccessResult(Messages.Update);
         }
 
        

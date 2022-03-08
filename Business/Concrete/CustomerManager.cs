@@ -24,7 +24,7 @@ namespace Business.Concrete
         public IResult Add(Customer customer)
         {
             _customerDal.Add(customer);
-            return new SuccessResult(Message.Create);
+            return new SuccessResult(Messages.Create);
         }
 
         public IDataResult<Customer> ColorGetById(int customerId)
@@ -35,18 +35,18 @@ namespace Business.Concrete
         public IResult Delete(Customer customer)
         {
            _customerDal.Delete(customer);
-            return new SuccessResult(Message.Delete);
+            return new SuccessResult(Messages.Delete);
         }
 
         public IDataResult<List<Customer>> GetAll()
         {
-            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(),Message.Listed);
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(),Messages.Listed);
         }
 
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);
-            return new SuccessResult(Message.Update);
+            return new SuccessResult(Messages.Update);
         }
     }
 }

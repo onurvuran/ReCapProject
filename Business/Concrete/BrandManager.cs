@@ -32,7 +32,7 @@ namespace Business.Concrete
 
             //}
             _brandDal.Add(brand);
-            return new SuccessResult(Message.Create);
+            return new SuccessResult(Messages.Create);
 
         }
 
@@ -40,7 +40,7 @@ namespace Business.Concrete
         {
             _brandDal.Delete(brand);
 
-            return new SuccessResult(Message.Delete);
+            return new SuccessResult(Messages.Delete);
 
         }
 
@@ -48,11 +48,11 @@ namespace Business.Concrete
         {
             if (DateTime.Now.Hour == 22)
             {
-                return new ErrorDataResult<List<Brand>>(Message.MaintenanceTime);
+                return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
             }
 
 
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Message.Listed);
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.Listed);
         }
 
         public IDataResult<Brand> BrandGetById(int brandId)
@@ -65,7 +65,7 @@ namespace Business.Concrete
 
 
             _brandDal.Update(brand);
-            return new SuccessResult(Message.Update);
+            return new SuccessResult(Messages.Update);
         }
     }
 }

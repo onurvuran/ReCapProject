@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Concreate;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,33 +21,19 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public IResult Add(User user)
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userDal.GetClaims(user);
+        }
+
+        public void Add(User user)
         {
             _userDal.Add(user);
-
-            return new SuccessResult(Message.Create);
         }
 
-        public IDataResult<User> UserGetById(int userId)
+        public User GetByMail(string email)
         {
-            return new SuccessDataResult<User>(_userDal.Get(p => p.UserId == userId));
-        }
-
-        public IResult Delete(User user)
-        {
-            _userDal.Delete(user);
-            return new SuccessResult(Message.Delete);
-        }
-
-        public IDataResult<List<User>> GetAll()
-        {
-           return new SuccessDataResult<List<User>>(_userDal.GetAll(),Message.Listed);  
-        }
-
-        public IResult Update(User user)
-        {
-            _userDal.Update(user);
-            return new SuccessResult(Message.Update);
+            return _userDal.Get(u => u.Email == email);
         }
     }
 }
